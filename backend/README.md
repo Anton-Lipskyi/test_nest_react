@@ -5,7 +5,8 @@ Please feel free to refactor the code as you see, while ensuring that it remains
 
 ## Tasks
 * Implement the existing "API endpoints" to fetch images and merge them into one response
-
+  https://my-json-server.typicode.com/icedrone/json-demo-server/photos
+  https://my-json-server.typicode.com/icedrone/json-demo-server/images
 
 ## Build Setup
 ```bash
