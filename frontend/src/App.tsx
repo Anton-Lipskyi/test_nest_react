@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Carousel from "./components/Carousel";
 import FullGallery from "./components/FullGallery";
 import Header from "./components/Header";
-// import { images } from "./images";
+import loadImages from "./utils/loadImages";
 import "./App.css";
 
 const App = () => {
@@ -11,8 +11,7 @@ const App = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:3000/images");
-      const data = await response.json();
+      const data = await loadImages();
       setImages(data);
     }
     fetchData();
@@ -27,7 +26,7 @@ const App = () => {
       <div className="toggle-container">
         <button onClick={handleToggleClick}>Toggle Layout</button>
       </div>
-      {images.length !== 0 && (
+      {(images.length !== 0 && (
         <>
           {layout === "carousel" ? (
             // @ts-ignore
@@ -37,6 +36,10 @@ const App = () => {
             <FullGallery images={images} />
           )}
         </>
+      )) || (
+        <div className="loading">
+          <p>No images found...</p>
+        </div>
       )}
     </div>
   );

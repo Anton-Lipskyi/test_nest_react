@@ -1,12 +1,15 @@
 .full-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    grid-gap: 15px;
+    grid-gap: 2.5rem;
 }
 
 .full-gallery .image-container {
     display: flex;
     flex-direction: column;
+    justify-content: start;
+    padding: 0;
+    /*height: 450px*/
 }
 
 .full-gallery img {
@@ -14,7 +17,7 @@
     height: auto;
     overflow: hidden;
     min-width: 100%;
-    height: calc(100% - 2rem);
+    /*height: calc(100% - 2rem);*/
     border: 1px solid gray;
 }
 

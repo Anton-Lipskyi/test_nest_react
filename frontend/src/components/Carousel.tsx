@@ -1,5 +1,5 @@
 // @ts-ignore
-import { useState, useEffect } from "react";
+import {useEffect, useState} from "react";
 
 import "./styles/Carousel.css";
 import { Image } from "../types";
@@ -7,6 +7,11 @@ import { Image } from "../types";
 // @ts-ignore
 const Carousel = ({ images }: { images: Image[] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeImage, setActiveImage] = useState(images[activeIndex]);
+
+  useEffect(() => {
+    setActiveImage(images[activeIndex]);
+  }, [activeIndex])
 
   const handlePrevClick = () => {
     setActiveIndex((activeIndex + images.length - 1) % images.length);
@@ -16,12 +21,12 @@ const Carousel = ({ images }: { images: Image[] }) => {
     setActiveIndex((activeIndex + 1) % images.length);
   };
 
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     setActiveIndex((activeIndex + 1) % images.length);
-  //   }, 5000);
-  //   return () => clearInterval(intervalId);
-  // }, [activeIndex, images.length]);
+  const setDimensions = (event: any) => {
+    // Set width and height of failed image to match the good image
+    console.log(event)
+    event.target.width = 600;
+    event.target.height = 600;
+  };
 
   const handleBulbClick = (index: number) => {
     setActiveIndex(index);
@@ -41,9 +46,10 @@ const Carousel = ({ images }: { images: Image[] }) => {
             ))}
           </div>
           <img
-            src={images[activeIndex].url}
-            alt="carousel item"
+            src={activeImage.url}
+            alt={activeImage.title}
             className="images"
+            onError={setDimensions}
           />
           <div className="controls">
             <button onClick={handlePrevClick}>&lt;</button>
