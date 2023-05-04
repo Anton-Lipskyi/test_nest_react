@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import Carousel from "./components/Carousel";
+import FullGallery from "./components/FullGallery";
+import Header from "./components/Header";
+// import { images } from "./images";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [layout, setLayout] = useState("carousel");
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch("http://localhost:3000/images");
+      const data = await response.json();
+      setImages(data);
+    }
+    fetchData();
+  }, []);
+
+  const handleToggleClick = () => {
+    setLayout(layout === "carousel" ? "full-gallery" : "carousel");
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header />
+      <div className="toggle-container">
+        <button onClick={handleToggleClick}>Toggle Layout</button>
+      </div>
+      {images.length !== 0 && (
+        <>
+          {layout === "carousel" ? (
+            // @ts-ignore
+            <Carousel images={images} />
+          ) : (
+            // @ts-ignore
+            <FullGallery images={images} />
+          )}
+        </>
+      )}
     </div>
   );
-}
+};
 
 export default App;

@@ -1,0 +1,29 @@
+.full-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-gap: 15px;
+}
+
+.full-gallery .image-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-gallery img {
+    /*max-width: 100%;*/
+    height: auto;
+    overflow: hidden;
+    min-width: 100%;
+    height: calc(100% - 2rem);
+    border: 1px solid gray;
+}
+
+.full-gallery p {
+    margin: 0;
+    padding: 0.75rem;
+    border: 1px solid gray;
+    border-top: none;
+    width: calc(100% - 1.5rem);
+    /*transform: translateY(-3px);*/
+    text-align: center;
+}
